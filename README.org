@@ -1,0 +1,4 @@
+#+title: python-pack
+#+author: ardumont
+
+Python-mode dev setup.
