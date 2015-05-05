@@ -26,11 +26,16 @@
 
 (require 'install-packages-pack)
 (install-packages-pack/install-packs '(python-mode
-                                       smartscan))
+                                       smartscan
+                                       repl-toggle))
 
 (require 'python-mode)
 
 (add-hook 'python-mode-hook (lambda () (smartscan-mode 1)))
+(add-hook 'python-mode-hook (lambda () company-mode-on))
+
+(require 'repl-toggle)
+(add-to-list 'rtog/mode-repl-alist '(python-mode . run-python))
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
