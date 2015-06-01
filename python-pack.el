@@ -27,7 +27,8 @@
 (require 'install-packages-pack)
 (install-packages-pack/install-packs '(python-mode
                                        smartscan
-                                       repl-toggle))
+                                       repl-toggle
+                                       flycheck-pyflakes))
 
 (require 'python-mode)
 
