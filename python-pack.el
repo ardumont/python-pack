@@ -31,8 +31,8 @@
 
 (require 'python-mode)
 
-(add-hook 'python-mode-hook (lambda () (smartscan-mode 1)))
-(add-hook 'python-mode-hook (lambda () company-mode-on))
+(add-hook 'python-mode-hook 'smartscan-mode-turn-on)
+(add-hook 'python-mode-hook 'company-mode-on)
 
 (require 'repl-toggle)
 (add-to-list 'rtog/mode-repl-alist '(python-mode . run-python))
