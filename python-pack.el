@@ -29,14 +29,13 @@
                                        smartscan
                                        repl-toggle
                                        flycheck-pyflakes))
-
 (require 'python-mode)
 
 (add-hook 'python-mode-hook 'smartscan-mode-turn-on)
 (add-hook 'python-mode-hook 'company-mode-on)
 
 (require 'repl-toggle)
-(add-to-list 'rtog/mode-repl-alist '(python-mode . run-python))
+(add-to-list 'rtog/mode-repl-alist '(python-mode . python3))
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
