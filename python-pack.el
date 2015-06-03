@@ -28,14 +28,26 @@
 (install-packages-pack/install-packs '(python-mode
                                        smartscan
                                        repl-toggle
-                                       flycheck-pyflakes))
-(require 'python-mode)
+                                       flycheck-pyflakes
+                                       use-package))
 
-(add-hook 'python-mode-hook 'smartscan-mode-turn-on)
-(add-hook 'python-mode-hook 'company-mode-on)
+(use-package repl-toggle
+  :init
+  (add-to-list 'rtog/mode-repl-alist '(python-mode . python3)))
 
-(require 'repl-toggle)
-(add-to-list 'rtog/mode-repl-alist '(python-mode . python3))
+(use-package anaconde-mode
+  :init
+  (bind-key "C-c C-d d" 'anaconda-mode-view-doc)
+  (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
+  )
+
+(use-package python-mode
+  :init
+  (add-hook 'python-mode-hook 'smartscan-mode-turn-on)
+  (add-hook 'python-mode-hook 'company-mode-on)
+
+  (define-key python-mode-map (kbd "C-c C-d") nil) ;; unbind key
+  (bind-key "C-c C-d t" 'py-pdbtrack-toggle-stack-tracking))
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
