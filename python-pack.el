@@ -35,19 +35,24 @@
   :init
   (add-to-list 'rtog/mode-repl-alist '(python-mode . python3)))
 
-(use-package anaconde-mode
+(use-package anaconda-mode
   :init
   (bind-key "C-c C-d d" 'anaconda-mode-view-doc)
   (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
   )
-
 (use-package python-mode
   :init
-  (add-hook 'python-mode-hook 'smartscan-mode-turn-on)
-  (add-hook 'python-mode-hook 'company-mode-on)
+  (dolist (py-mode '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
+    (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
+      (add-hook py-mode hook-fn)))
 
   (define-key python-mode-map (kbd "C-c C-d") nil) ;; unbind key
-  (bind-key "C-c C-d t" 'py-pdbtrack-toggle-stack-tracking))
+  (bind-key "C-c C-d t" 'py-pdbtrack-toggle-stack-tracking)
+
+  (custom-set-variables '(py-shell-name "python3")
+                        '(py-python-command "python3")))
+
+
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
