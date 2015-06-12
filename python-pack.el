@@ -33,7 +33,7 @@
 
 (use-package repl-toggle
   :init
-  (add-to-list 'rtog/mode-repl-alist '(python-mode . python3)))
+  (add-to-list 'rtog/mode-repl-alist '(python-mode . ipython3)))
 
 (use-package anaconda-mode
   :init
