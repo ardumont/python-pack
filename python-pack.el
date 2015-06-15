@@ -24,35 +24,28 @@
 
 ;;; Code:
 
-(require 'install-packages-pack)
-(install-packages-pack/install-packs '(python-mode
-                                       smartscan
-                                       repl-toggle
-                                       flycheck-pyflakes
-                                       use-package))
+(use-package flycheck-pyflakes)
+(use-package smartscan)
 
 (use-package repl-toggle
-  :init
-  (add-to-list 'rtog/mode-repl-alist '(python-mode . ipython3)))
+  :init (add-to-list 'rtog/mode-repl-alist '(python-mode . ipython3)))
+
+(use-package python-mode
+  :init (progn
+          (define-key python-mode-map (kbd "C-c C-d") nil) ;; unbind key
+          (dolist (py-mode '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
+            (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
+              (add-hook py-mode hook-fn))))
+  :bind ("C-c C-d t" . py-pdbtrack-toggle-stack-tracking)
+  :config (custom-set-variables '(py-shell-name "python3")
+                                '(py-python-command "python3")))
 
 (use-package anaconda-mode
-  :init
-  (bind-key "C-c C-d d" 'anaconda-mode-view-doc)
-  (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
-  )
-(use-package python-mode
-  :init
-  (dolist (py-mode '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
-    (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
-      (add-hook py-mode hook-fn)))
-
-  (define-key python-mode-map (kbd "C-c C-d") nil) ;; unbind key
-  (bind-key "C-c C-d t" 'py-pdbtrack-toggle-stack-tracking)
-
-  (custom-set-variables '(py-shell-name "python3")
-                        '(py-python-command "python3")))
-
-
+  :config (progn
+            (message "python-pack - anaconda - Remove unwanted M-? binding.")
+            (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
+            (define-key anaconda-mode-map [remap tags-loop-continue] 'anaconda-nav-pop-marker))
+  :bind ("C-c C-d d" . anaconda-mode-view-doc))
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
