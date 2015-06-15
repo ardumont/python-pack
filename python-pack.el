@@ -24,12 +24,11 @@
 
 ;;; Code:
 
-(use-package flycheck-pyflakes)
-(use-package smartscan)
-
 (use-package python-mode
   :init (progn
           (define-key python-mode-map (kbd "C-c C-d") nil) ;; unbind key
+          (use-package flycheck-pyflakes)
+          (use-package smartscan)
           (dolist (py-mode '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
             (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
               (add-hook py-mode hook-fn))))
@@ -39,7 +38,6 @@
 
 (use-package anaconda-mode
   :config (progn
-            (message "python-pack - anaconda - Remove unwanted M-? binding.")
             (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
             (define-key anaconda-mode-map [remap tags-loop-continue] 'anaconda-nav-pop-marker))
   :bind ("C-c C-d d" . anaconda-mode-view-doc))
