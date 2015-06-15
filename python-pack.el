@@ -27,9 +27,6 @@
 (use-package flycheck-pyflakes)
 (use-package smartscan)
 
-(use-package repl-toggle
-  :init (add-to-list 'rtog/mode-repl-alist '(python-mode . ipython3)))
-
 (use-package python-mode
   :init (progn
           (define-key python-mode-map (kbd "C-c C-d") nil) ;; unbind key
