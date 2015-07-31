@@ -24,23 +24,24 @@
 
 ;;; Code:
 
+(use-package flycheck-pyflakes)
+(use-package smartscan)
+
 (use-package python-mode
   :bind ("C-c C-d t" . py-pdbtrack-toggle-stack-tracking)
-  :config (define-key python-mode-map (kbd "C-c C-d") nil)
-  :init (progn
-          (use-package flycheck-pyflakes)
-          (use-package smartscan)
-          (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
-            (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
-              (add-hook py-mode-hook hook-fn)))
-          (custom-set-variables '(py-shell-name "python3")
-                                '(py-python-command "python3"))))
+  :config
+  (define-key python-mode-map (kbd "C-c C-d") nil)
+  (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
+    (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
+      (add-hook py-mode-hook hook-fn)))
+  (custom-set-variables '(py-python-command "python3")
+                        '(ipython-command "ipython3")))
 
 (use-package anaconda-mode
-  :config (progn
-            (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
-            (define-key anaconda-mode-map [remap tags-loop-continue] 'anaconda-nav-pop-marker))
-  :bind ("C-c C-d d" . anaconda-mode-view-doc))
+  :bind ("C-c C-d d" . anaconda-mode-view-doc)
+  :config
+  (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
+  (define-key anaconda-mode-map [remap tags-loop-continue] 'anaconda-nav-pop-marker))
 
 (defun python-pack-trace-at-point ()
   "Dump a print trace of the variable at point."
