@@ -26,6 +26,7 @@
 
 (use-package python-mode
   :bind ("C-c C-d t" . py-pdbtrack-toggle-stack-tracking)
+  :config (define-key python-mode-map (kbd "C-c C-d") nil)
   :init (progn
           (use-package flycheck-pyflakes)
           (use-package smartscan)
@@ -33,8 +34,7 @@
             (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
               (add-hook py-mode-hook hook-fn)))
           (custom-set-variables '(py-shell-name "python3")
-                                '(py-python-command "python3")))
-  :config (define-key python-mode-map (kbd "C-c C-d") nil))
+                                '(py-python-command "python3"))))
 
 (use-package anaconda-mode
   :config (progn
