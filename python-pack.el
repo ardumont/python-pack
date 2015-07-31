@@ -42,16 +42,14 @@
             (define-key anaconda-mode-map [remap tags-loop-continue] 'anaconda-nav-pop-marker))
   :bind ("C-c C-d d" . anaconda-mode-view-doc))
 
-(require 'thingatpt)
-
-(defun python-pack/trace-at-point ()
+(defun python-pack-trace-at-point ()
   "Dump a print trace of the variable at point."
   (interactive)
-  (let ((print-statement (let ((var (thing-at-point 'word)))
+  (let ((print-statement (let ((var (symbol-at-point)))
                            (format "print ('%s: ', %s)"  var var))))
     (save-excursion
       (with-current-buffer (current-buffer)
-        (end-of-line)  ;; FIXME: find a next sexp equivalent because python statement will often be multi-lines
+        (forward-sentence)
         (insert "\n")
         (call-interactively 'indent-for-tab-command)
         (insert print-statement)))))
