@@ -28,9 +28,10 @@
 (use-package smartscan)
 
 (use-package python-mode
-  :bind ("C-c C-d t" . py-pdbtrack-toggle-stack-tracking)
   :config
   (define-key python-mode-map (kbd "C-c C-d") nil)
+  (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
+
   (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
     (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
       (add-hook py-mode-hook hook-fn)))
