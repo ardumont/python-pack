@@ -40,6 +40,10 @@
                         '(py-shell-name "python3")
                         '(py-ipython-command "ipython3")))
 
+(use-package toggle-repl
+  :config
+  (rtog/add-repl 'python-mode 'ipython3-switch))
+
 (use-package anaconda-mode
   :bind ("C-c C-d d" . anaconda-mode-view-doc)
   :config
