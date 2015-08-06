@@ -36,7 +36,8 @@
     (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
       (add-hook py-mode-hook hook-fn)))
   (custom-set-variables '(py-python-command "python3")
-                        '(ipython-command "ipython3")))
+                        '(py-shell-name "python3")
+                        '(py-ipython-command "ipython3")))
 
 (use-package anaconda-mode
   :bind ("C-c C-d d" . anaconda-mode-view-doc)
