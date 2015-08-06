@@ -33,8 +33,9 @@
   (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
 
   (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
-    (dolist (hook-fn '(smartscan-mode-turn-on company-mode-on anaconda-mode))
+    (dolist (hook-fn '(company-mode-on anaconda-mode))
       (add-hook py-mode-hook hook-fn)))
+  (add-hook 'python-mode-hook 'smartscan-mode)
   (custom-set-variables '(py-python-command "python3")
                         '(py-shell-name "python3")
                         '(py-ipython-command "ipython3")))
