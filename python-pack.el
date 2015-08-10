@@ -31,6 +31,9 @@
   :config
   (define-key python-mode-map (kbd "C-c C-d") nil)
   (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
+  (define-key python-mode-map (kbd "C-c C-c") 'py-execute-statement-python3-no-switch)
+  (define-key python-mode-map (kbd "C-c C-b") 'py-execute-buffer-python3-no-switch)
+  (define-key python-mode-map (kbd "C-c C-l") 'py-execute-buffer-python3-no-switch)
 
   (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
     (dolist (hook-fn '(company-mode-on anaconda-mode))
@@ -38,11 +41,18 @@
   (add-hook 'python-mode-hook 'smartscan-mode)
   (custom-set-variables '(py-python-command "python3")
                         '(py-shell-name "python3")
-                        '(py-ipython-command "ipython3")))
+                        '(python-indent-offset 4)
+                        '(py-ipython-command "ipython3")
+                        '(py-keep-windows-configuration 'force)
+                        '(py-switch-buffers-on-execute-p nil)
+                        '(py-split-window-on-execute 'just-two)))
+
+;; for debug
 
 (use-package repl-toggle
   :config
-  (rtog/add-repl 'python-mode 'python3-switch))
+  (rtog/add-repl 'python-mode 'py-switch-to-shell)
+  (custom-set-variables '(rtog/fullscreen t)))
 
 (use-package anaconda-mode
   :bind ("C-c C-d d" . anaconda-mode-view-doc)
