@@ -42,7 +42,7 @@
 
 (use-package repl-toggle
   :config
-  (rtog/add-repl 'python-mode 'ipython3-switch))
+  (rtog/add-repl 'python-mode 'python3-switch))
 
 (use-package anaconda-mode
   :bind ("C-c C-d d" . anaconda-mode-view-doc)
