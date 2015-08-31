@@ -47,6 +47,10 @@
                         '(py-switch-buffers-on-execute-p nil)
                         '(py-split-window-on-execute 'just-two)))
 
+(use-package company-jedi
+  :config
+  (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi))))
+
 ;; for debug
 
 (use-package repl-toggle
