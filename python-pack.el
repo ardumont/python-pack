@@ -36,9 +36,10 @@
   (define-key python-mode-map (kbd "C-c C-l") 'py-execute-buffer-python3-no-switch)
 
   (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
-    (dolist (hook-fn '(company-mode-on anaconda-mode))
+    (dolist (hook-fn '(company-mode-on))
       (add-hook py-mode-hook hook-fn)))
   (add-hook 'python-mode-hook 'smartscan-mode)
+  (add-hook 'python-mode-hook 'eldoc-mode)
   (custom-set-variables '(py-python-command "python3")
                         '(py-shell-name "python3")
                         '(python-indent-offset 4)
@@ -46,6 +47,16 @@
                         '(py-keep-windows-configuration 'force)
                         '(py-switch-buffers-on-execute-p nil)
                         '(py-split-window-on-execute 'just-two)))
+
+(use-package python
+  :config
+  (custom-set-variables '(python-shell-interpreter "python3")
+                        '(python-shell-buffer-name "Python3")))
+
+(use-package elpy
+  :config
+  (custom-set-variables '(elpy-rpc-python-command "python3")
+                        '(elpy-test-discover-runner-command '("python3" "-m" "unittest"))))
 
 (use-package company-jedi
   :config
@@ -57,12 +68,6 @@
   :config
   (rtog/add-repl 'python-mode 'py-switch-to-shell)
   (custom-set-variables '(rtog/fullscreen t)))
-
-(use-package anaconda-mode
-  :bind ("C-c C-d d" . anaconda-mode-view-doc)
-  :config
-  (define-key anaconda-mode-map (kbd "M-?") nil) ;; unbind M-? (already used as emacs' default C-h)
-  (define-key anaconda-mode-map [remap tags-loop-continue] 'anaconda-nav-pop-marker))
 
 (defun python-pack-trace-at-point ()
   "Dump a print trace of the variable at point."
