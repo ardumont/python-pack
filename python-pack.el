@@ -56,7 +56,8 @@
 (use-package elpy
   :config
   (custom-set-variables '(elpy-rpc-python-command "python3")
-                        '(elpy-test-discover-runner-command '("python3" "-m" "unittest"))))
+                        '(elpy-test-discover-runner-command '("python3" "-m" "unittest")))
+  (elpy-enable))
 
 (use-package company-jedi
   :config
