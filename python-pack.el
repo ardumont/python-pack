@@ -36,8 +36,7 @@
   (define-key python-mode-map (kbd "C-c C-l") 'py-execute-buffer-python3-no-switch)
 
   (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
-    (dolist (hook-fn '(company-mode-on))
-      (add-hook py-mode-hook hook-fn)))
+    (add-hook py-mode-hook 'company-mode-on))
   (add-hook 'python-mode-hook 'smartscan-mode)
   (add-hook 'python-mode-hook 'eldoc-mode)
   (custom-set-variables '(py-python-command "python3")
@@ -51,17 +50,26 @@
 (use-package python
   :config
   (custom-set-variables '(python-shell-interpreter "python3")
+                        ;; '(python-shell-interpreter-args "...")
                         '(python-shell-buffer-name "Python3")))
+
+(use-package flycheck)
 
 (use-package elpy
   :config
+  (add-hook 'elpy-mode-hook 'flycheck-mode)
+  (add-hook 'elpy-mode-hook (lambda ()
+                              (define-key elpy-mode-map (kbd "M-,") 'pop-tag-mark)))
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (custom-set-variables '(elpy-rpc-python-command "python3")
-                        '(elpy-test-discover-runner-command '("python3" "-m" "unittest")))
+                        '(elpy-test-discover-runner-command '("python3" "-m" "nose")))
+
   (elpy-enable))
 
-(use-package company-jedi
-  :config
-  (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi))))
+;; (use-package company-jedi
+;;   :config
+;;   (add-hook 'python-mode-hook
+;;             (lambda () (add-to-list 'company-backends 'company-jedi))))
 
 ;; for debug
 
