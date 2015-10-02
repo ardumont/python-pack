@@ -49,7 +49,7 @@
 
 (use-package python
   :config
-  (custom-set-variables '(python-shell-interpreter "python3")
+  (custom-set-variables '(python-shell-interpreter "ipython3")
                         ;; '(python-shell-interpreter-args "...")
                         '(python-shell-buffer-name "Python3")))
 
