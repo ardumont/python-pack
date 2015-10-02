@@ -73,11 +73,6 @@
 
 ;; for debug
 
-(use-package repl-toggle
-  :config
-  (rtog/add-repl 'python-mode 'py-switch-to-shell)
-  (custom-set-variables '(rtog/fullscreen t)))
-
 (defun python-pack-trace-at-point ()
   "Dump a print trace of the variable at point."
   (interactive)
