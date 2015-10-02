@@ -66,11 +66,6 @@
 
   (elpy-enable))
 
-;; (use-package company-jedi
-;;   :config
-;;   (add-hook 'python-mode-hook
-;;             (lambda () (add-to-list 'company-backends 'company-jedi))))
-
 ;; for debug
 
 (defun python-pack-trace-at-point ()
