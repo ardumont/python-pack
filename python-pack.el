@@ -37,7 +37,7 @@
 
   (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
     (dolist (hook-fn '(company-mode-on subword-mode))
-      (add-hook py-mode-hook hook-fn))))
+      (add-hook py-mode-hook hook-fn)))
 
   (add-hook 'python-mode-hook 'smartscan-mode)
   (add-hook 'python-mode-hook 'eldoc-mode)
