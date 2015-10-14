@@ -24,7 +24,6 @@
 
 ;;; Code:
 
-(use-package flycheck-pyflakes)
 (use-package smartscan)
 
 (use-package python-mode
@@ -55,14 +54,15 @@
                         ;; '(python-shell-interpreter-args "...")
                         '(python-shell-buffer-name "Python3")))
 
-(use-package flycheck)
+;;(use-package flycheck-pyflakes)
+;;(use-package flycheck)
 
 (use-package elpy
   :config
-  (add-hook 'elpy-mode-hook 'flycheck-mode)
+  ;;(add-hook 'elpy-mode-hook 'flycheck-mode)
   (add-hook 'elpy-mode-hook (lambda ()
                               (define-key elpy-mode-map (kbd "M-,") 'pop-tag-mark)))
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  ;;(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (custom-set-variables '(elpy-rpc-python-command "python3")
                         '(elpy-test-discover-runner-command '("python3" "-m" "nose")))
 
