@@ -82,5 +82,14 @@
         (call-interactively 'indent-for-tab-command)
         (insert print-statement)))))
 
+(defun python-pack-add-nose-test-attr-one ()
+  "Add into python code an attr one to ease testing for that particular test.
+Then use: nosetests3 path/to/test.py -a one to trigger the tests."
+  (interactive)
+  (save-excursion
+    (with-current-buffer (current-buffer)
+      (insert "\nfrom nose.plugins.attrib import attr
+    @attr('one')\n"))))
+
 (provide 'python-pack)
 ;;; python-pack.el ends here
