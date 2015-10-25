@@ -25,17 +25,27 @@
 ;;; Code:
 
 (use-package smartscan)
+(use-package whitespace)
 
 (use-package python-mode
   :config
+  (defun whitespace-hook-fn ()
+    (require 'whitespace)
+    (custom-set-variables '(whitespace-line-column 79)
+                          '(whitespace-style '(face tabs empty trailing lines-tail))))
+
   (define-key python-mode-map (kbd "C-c C-d") nil)
   (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
   (define-key python-mode-map (kbd "C-c C-c") 'py-execute-statement-python3-no-switch)
   (define-key python-mode-map (kbd "C-c C-b") 'py-execute-buffer-python3-no-switch)
   (define-key python-mode-map (kbd "C-c C-l") 'py-execute-buffer-python3-no-switch)
 
-  (dolist (py-mode-hook '(python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
-    (dolist (hook-fn '(company-mode-on subword-mode))
+  (dolist (py-mode-hook '(python-mode-hook
+                          py-python-shell-mode-hook
+                          py-ipython-shell-mode-hook))
+    (dolist (hook-fn '(company-mode-on
+                       subword-mode
+                       whitespace-hook-fn))
       (add-hook py-mode-hook hook-fn)))
 
   (add-hook 'python-mode-hook 'smartscan-mode)
