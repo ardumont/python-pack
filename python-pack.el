@@ -62,7 +62,8 @@
   :config
   (custom-set-variables '(python-shell-interpreter "ipython3")
                         ;; '(python-shell-interpreter-args "...")
-                        '(python-shell-buffer-name "Python3")))
+                        '(python-shell-buffer-name "Python3")
+                        '(python-check-command "pyflakes3")))
 
 ;;(use-package flycheck-pyflakes)
 ;;(use-package flycheck)
