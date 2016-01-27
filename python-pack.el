@@ -96,7 +96,7 @@
 (defun python-pack-add-nose-test-attr-one (&optional args)
   "Add into python code an attr one to ease testing for that particular test.
 Then use: nosetests3 path/to/test.py -a one to trigger the tests.
-With args set, does not add import statement."
+With ARGS set, does not add import statement."
   (interactive "P")
   (lexical-let ((import (if (null args)
                             "    from nose.plugins.attrib import attr\n"
