@@ -24,60 +24,57 @@
 
 ;;; Code:
 
-(use-package smartscan)
-(use-package whitespace)
+(require 'smartscan)
+(require 'whitespace)
 
-(use-package python-mode
-  :config
-  (defun whitespace-hook-fn ()
-    (require 'whitespace)
-    (custom-set-variables '(whitespace-line-column 79)
-                          '(whitespace-style '(face tabs empty trailing lines-tail))))
+(require 'python-mode)
+(defun whitespace-hook-fn ()
+  (require 'whitespace)
+  (custom-set-variables '(whitespace-line-column 79)
+			'(whitespace-style '(face tabs empty trailing lines-tail))))
 
-  (define-key python-mode-map (kbd "C-c C-d") nil)
-  (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
-  (define-key python-mode-map (kbd "C-c C-c") 'py-execute-statement-python3-no-switch)
-  (define-key python-mode-map (kbd "C-c C-b") 'py-execute-buffer-python3-no-switch)
-  (define-key python-mode-map (kbd "C-c C-l") 'py-execute-buffer-python3-no-switch)
+(define-key python-mode-map (kbd "C-c C-d") nil)
+(define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
+(define-key python-mode-map (kbd "C-c C-c") 'py-execute-statement-python3-no-switch)
+(define-key python-mode-map (kbd "C-c C-b") 'py-execute-buffer-python3-no-switch)
+(define-key python-mode-map (kbd "C-c C-l") 'py-execute-buffer-python3-no-switch)
 
-  (dolist (py-mode-hook '(python-mode-hook
-                          py-python-shell-mode-hook
-                          py-ipython-shell-mode-hook))
-    (dolist (hook-fn '(company-mode-on
-                       subword-mode
-                       whitespace-hook-fn))
-      (add-hook py-mode-hook hook-fn)))
+(dolist (py-mode-hook '(python-mode-hook
+			py-python-shell-mode-hook
+			py-ipython-shell-mode-hook))
+  (dolist (hook-fn '(company-mode-on
+		     subword-mode
+		     whitespace-hook-fn))
+    (add-hook py-mode-hook hook-fn)))
 
-  (add-hook 'python-mode-hook 'smartscan-mode)
-  (add-hook 'python-mode-hook 'eldoc-mode)
-  (custom-set-variables '(py-python-command "python3")
-                        '(py-shell-name "python3")
-                        '(python-indent-offset 4)
-                        '(py-ipython-command "ipython3")
-                        '(py-keep-windows-configuration 'force)
-                        '(py-switch-buffers-on-execute-p nil)
-                        '(py-split-window-on-execute 'just-two)))
+(add-hook 'python-mode-hook 'smartscan-mode)
+(add-hook 'python-mode-hook 'eldoc-mode)
+(custom-set-variables '(py-python-command "python3")
+		      '(py-shell-name "python3")
+		      '(python-indent-offset 4)
+		      '(py-ipython-command "ipython3")
+		      '(py-keep-windows-configuration 'force)
+		      '(py-switch-buffers-on-execute-p nil)
+		      '(py-split-window-on-execute 'just-two))
 
-(use-package python
-  :config
-  (custom-set-variables '(python-shell-interpreter "ipython3")
-                        ;; '(python-shell-interpreter-args "...")
-                        '(python-shell-buffer-name "Python3")
-                        '(python-check-command "pyflakes3")))
+(require 'python)
+(custom-set-variables '(python-shell-interpreter "ipython3")
+		      ;; '(python-shell-interpreter-args "...")
+		      '(python-shell-buffer-name "Python3")
+		      '(python-check-command "pyflakes3"))
 
-;;(use-package flycheck-pyflakes)
-;;(use-package flycheck)
+;; (require 'flycheck-pyflakes)
+;; (require 'flycheck)
 
-(use-package elpy
-  :config
-  ;;(add-hook 'elpy-mode-hook 'flycheck-mode)
-  (add-hook 'elpy-mode-hook (lambda ()
-                              (define-key elpy-mode-map (kbd "M-,") 'pop-tag-mark)))
-  ;;(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (custom-set-variables '(elpy-rpc-python-command "python3")
-                        '(elpy-test-discover-runner-command '("python3" "-m" "nose")))
+(require 'elpy)
+;;(add-hook 'elpy-mode-hook 'flycheck-mode)
+(add-hook 'elpy-mode-hook (lambda ()
+			    (define-key elpy-mode-map (kbd "M-,") 'pop-tag-mark)))
+;;(setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+(custom-set-variables '(elpy-rpc-python-command "python3")
+		      '(elpy-test-discover-runner-command '("python3" "-m" "nose")))
 
-  (elpy-enable))
+(elpy-enable)
 
 ;; for debug
 
