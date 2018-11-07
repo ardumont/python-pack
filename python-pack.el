@@ -59,24 +59,21 @@
 		      '(python-shell-buffer-name "Python3")
 		      '(python-check-command "pyflakes3"))
 
+(defun python-pack--hook-fn ()
+  "Hook function to install on python modes."
+  (custom-set-variables '(whitespace-line-column 79)
+			'(whitespace-style '(face tabs empty trailing
+						  lines-tail))))
+
 (dolist (py-mode-hook '(python-mode-hook
 			py-python-shell-mode-hook
 			py-ipython-shell-mode-hook))
   (dolist (hook-fn '(subword-mode
+		     python-pack--hook-fn
 		     jedi:setup
 		     smartscan-mode
 		     eldoc-mode))
-    (message "hook %s installed on %s" hook-fn py-mode-hook)
     (add-hook py-mode-hook hook-fn)))
-
-;; somehow that does not work
-
-;; (defun python-pack--hook-fn ()
-;;   "Hook function to install on python modes."
-;;   (custom-set-variables '(whitespace-line-column 79)
-;; 			'(whitespace-style '(face tabs empty trailing
-;; 						  lines-tail))))
-;; (add-hook 'python-mode-hook 'python-pack-hook--fn)
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
