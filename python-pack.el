@@ -29,35 +29,23 @@
 (require 'whitespace)
 
 ;; external
-(require 'jedi)
-(require 'python-mode)
 (require 'smartscan)
+(require 'elpy)
+(elpy-enable)
 
-(define-key python-mode-map (kbd "M-.") 'jedi:goto-definition)
-(define-key python-mode-map (kbd "M-,") 'jedi:goto-definition-pop-marker)
-(define-key python-mode-map (kbd "C-i") 'jedi:complete)
-(define-key python-mode-map (kbd "C-c d") 'jedi:show-doc)
-(define-key python-mode-map (kbd "M-?") 'helm-jedi-related-names)
 (define-key python-mode-map (kbd "C-c C-d") nil)
 (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
 (define-key python-mode-map (kbd "C-c C-c") 'py-execute-statement-python3-no-switch)
 (define-key python-mode-map (kbd "C-c C-b") 'py-execute-buffer-python3-no-switch)
 (define-key python-mode-map (kbd "C-c C-l") 'py-execute-buffer-python3-no-switch)
 
-(custom-set-variables '(jedi:complete-on-dot t)
-		      ;; python-mode setup
-		      '(py-python-command "python3")
-		      '(py-shell-name "python3")
-		      '(py-ipython-command "ipython3")
-		      '(py-keep-windows-configuration 'force)
-		      '(py-switch-buffers-on-execute-p nil)
-		      '(py-split-window-on-execute 'just-two)
-		      ;; python setup
-		      '(python-shell-interpreter "ipython3")
-		      ;; '(python-shell-interpreter-args "...")
-		      '(python-indent-offset 4)
-		      '(python-shell-buffer-name "Python3")
-		      '(python-check-command "pyflakes3"))
+(custom-set-variables
+ ;; python setup
+ '(python-shell-interpreter "ipython3")
+ ;; '(python-shell-interpreter-args "...")
+ '(python-indent-offset 4)
+ '(python-shell-buffer-name "Python3")
+ '(python-check-command "pyflakes3"))
 
 (defun python-pack--hook-fn ()
   "Hook function to install on python modes."
@@ -70,7 +58,6 @@
 			py-ipython-shell-mode-hook))
   (dolist (hook-fn '(subword-mode
 		     python-pack--hook-fn
-		     jedi:setup
 		     smartscan-mode
 		     eldoc-mode))
     (add-hook py-mode-hook hook-fn)))
