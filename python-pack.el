@@ -33,6 +33,8 @@
 (require 'elpy)
 (elpy-enable)
 
+(define-key elpy-mode-map (kbd "M-.") 'elpy-goto-definition)
+
 (define-key python-mode-map (kbd "C-c C-d") nil)
 (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
 (define-key python-mode-map (kbd "C-c C-c") 'py-execute-statement-python3-no-switch)
