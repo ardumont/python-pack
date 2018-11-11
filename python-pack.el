@@ -1,9 +1,8 @@
-;;; python-pack.el --- A pack for python setup  -*- lexical-binding: t; -*-
+;;; python-pack.el --- A pack for python setup
 
-;; Copyright (C) 2014-2018  Antoine R. Dumont
-
-;; Author: Antoine R. Dumont <tony@dagobah>
-;; Keywords: unix, convenience
+;; Copyright (C) 2014-2018  Antoine R. Dumont (@ardumont)
+;; Author: Antoine R. Dumont (@ardumont) <antoine.romain.dumont@gmail.com>
+;; Keywords:
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -18,9 +17,9 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Commentary:
+;; This file is NOT part of GNU Emacs.
 
-;;
+;;; Commentary:
 
 ;;; Code:
 
