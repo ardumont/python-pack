@@ -29,7 +29,6 @@
 (require 'whitespace)
 
 ;; external
-(require 'smartscan)
 (require 'elpy)
 (elpy-enable)
 
@@ -58,10 +57,7 @@
 (dolist (py-mode-hook '(python-mode-hook
 			py-python-shell-mode-hook
 			py-ipython-shell-mode-hook))
-  (dolist (hook-fn '(subword-mode
-		     python-pack--hook-fn
-		     smartscan-mode
-		     eldoc-mode))
+  (dolist (hook-fn '(python-pack--hook-fn))
     (add-hook py-mode-hook hook-fn)))
 
 (provide 'python-pack)
