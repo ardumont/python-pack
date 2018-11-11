@@ -33,7 +33,6 @@
 (elpy-enable)
 
 (define-key elpy-mode-map (kbd "M-.") 'elpy-goto-definition)
-
 (define-key python-mode-map (kbd "C-c C-d") nil)
 (define-key python-mode-map (kbd "C-c C-d t") 'py-pdbtrack-toggle-stack-tracking)
 (define-key python-mode-map (kbd "C-c C-c") 'py-execute-statement-python3-no-switch)
@@ -47,18 +46,6 @@
  '(python-indent-offset 4)
  '(python-shell-buffer-name "Python3")
  '(python-check-command "pyflakes3"))
-
-(defun python-pack--hook-fn ()
-  "Hook function to install on python modes."
-  (custom-set-variables '(whitespace-line-column 79)
-			'(whitespace-style '(face tabs empty trailing
-						  lines-tail))))
-
-(dolist (py-mode-hook '(python-mode-hook
-			py-python-shell-mode-hook
-			py-ipython-shell-mode-hook))
-  (dolist (hook-fn '(python-pack--hook-fn))
-    (add-hook py-mode-hook hook-fn)))
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
