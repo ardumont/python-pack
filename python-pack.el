@@ -26,6 +26,7 @@
 ;; internal libs
 (require 'python)
 (require 'whitespace)
+(require 'smartparens-config)
 
 ;; external
 (require 'elpy)
@@ -45,6 +46,8 @@
  '(python-indent-offset 4)
  '(python-shell-buffer-name "Python3")
  '(python-check-command "pyflakes3"))
+
+(add-hook 'python-mode-hook 'smartparens-strict-mode)
 
 (provide 'python-pack)
 ;;; python-pack.el ends here
