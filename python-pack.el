@@ -36,7 +36,6 @@
 (define-key smartparens-mode-map (kbd "C-M-h") 'sp-backward-kill-sexp)
 (define-key smartparens-mode-map (kbd "C-)") 'sp-forward-slurp-sexp) ;; sp-slurp-hybrid-sexp
 (define-key smartparens-mode-map (kbd "C-(") 'sp-backward-slurp-sexp)
-(define-key smartparens-mode-map (kbd "C-k") 'sp-kill-hybrid-sexp)
 
 (define-key smartparens-mode-map (kbd "M-S") 'sp-splice-sexp)
 (define-key smartparens-mode-map (kbd "M-s") 'sp-split-sexp)
@@ -47,6 +46,9 @@
 (define-key smartparens-mode-map (kbd "C-M-a") 'sp-beginning-of-sexp)
 (define-key smartparens-mode-map (kbd "C-M-e") 'sp-end-of-sexp)
 (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+
+;; keep standard kill-line sp-kill-hybrid-sexp is strange
+(define-key smartparens-strict-mode-map [remap kill-line] nil)
 
 (define-key elpy-mode-map (kbd "M-.") 'elpy-goto-definition)
 (define-key python-mode-map (kbd "C-c C-d") nil)
