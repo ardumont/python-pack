@@ -33,12 +33,13 @@
 (elpy-enable)
 
 ;; define paredit-like bindings
+
 (define-key smartparens-mode-map (kbd "C-M-h") 'sp-backward-kill-sexp)
 (define-key smartparens-mode-map (kbd "C-)") 'sp-forward-slurp-sexp) ;; sp-slurp-hybrid-sexp
 (define-key smartparens-mode-map (kbd "C-(") 'sp-backward-slurp-sexp)
 
-(define-key smartparens-mode-map (kbd "M-S") 'sp-splice-sexp)
-(define-key smartparens-mode-map (kbd "M-s") 'sp-split-sexp)
+(define-key smartparens-mode-map (kbd "M-s") 'sp-splice-sexp)
+(define-key smartparens-mode-map (kbd "M-S") 'sp-split-sexp)
 (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
 (define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
 (define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
